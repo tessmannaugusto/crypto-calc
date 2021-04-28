@@ -8,11 +8,11 @@ import { Component, OnInit, Output } from '@angular/core';
 export class TextElementComponent implements OnInit {
 
   initialValue: number = 3000;
-  currentValue;
+  currentValue: number;
+  pastValue:number;
   coinValue: number = 55000;
   resultValue: number;
   investToggle: boolean = false;
-  investToggleValue: string = "invest";
 
   currencies:string[] = ["Bitcoin", "Ethereum", "Dogecoin", "blabla"]
   selectedCurrency: string = this.currencies[0]
@@ -43,7 +43,12 @@ export class TextElementComponent implements OnInit {
 
   //Updates the number of resultValue
   calcInvestment(){
-    this.resultValue = (this.initialValue /  this.currentValue) * this.coinValue ;
+    if(!this.investToggle){
+      this.resultValue = (this.initialValue /  this.currentValue) * this.coinValue
+    }else{
+      this.resultValue = (this.initialValue /  this.pastValue) * this.currentValue
+    }
+     ;
   }
 
   //Function to mock the fetching of current coin value
@@ -51,22 +56,18 @@ export class TextElementComponent implements OnInit {
     switch (crypto) {
       case "Bitcoin":
         this.currentValue = await Promise.resolve(50000.00);
-        // this.coinValue = this.currentValue * 1.2;
         this.calcInvestment();
         break;
       case "Ethereum":
         this.currentValue = await Promise.resolve(1000.00);
-        // this.coinValue = this.currentValue * 1.2;
         this.calcInvestment();
         break;
       case "Dogecoin":
         this.currentValue = await Promise.resolve(50.00);
-        // this.coinValue = this.currentValue * 1.2;
         this.calcInvestment();
         break;
       case "blabla":
-        this.currentValue = await Promise.resolve(3.00);
-        // this.coinValue = this.currentValue * 1.2;
+        this.currentValue = await Promise.resolve(20.00);
         this.calcInvestment();
         break;
       default:
@@ -77,8 +78,8 @@ export class TextElementComponent implements OnInit {
   }
 
   onChangeSelect(){
-    console.log(this.selectedCurrency)
     this.fetchCurrentValue(this.selectedCurrency);
+    this.fetchPastValue(this.selectedCurrency)
   }
 
   onInvestToggle(spanElement: HTMLSpanElement){
@@ -88,7 +89,34 @@ export class TextElementComponent implements OnInit {
     }
     else{
       this.investToggle = true;
+      this.fetchPastValue(this.selectedCurrency)
       spanElement.innerHTML = "invested"
     }
   }
+//Function to mock the fetching of past coin value. @@@@@@NEEDS REFACTORINGg@@@@@@
+  async fetchPastValue(crypto: string){
+    switch (crypto) {
+      case "Bitcoin":
+        this.pastValue = await Promise.resolve(25000.00);
+        this.calcInvestment();
+        break;
+      case "Ethereum":
+        this.pastValue = await Promise.resolve(200.00);
+        this.calcInvestment();
+        break;
+      case "Dogecoin":
+        this.pastValue = await Promise.resolve(5.00);
+        this.calcInvestment();
+        break;
+      case "blabla":
+        this.pastValue = await Promise.resolve(1.00);
+        this.calcInvestment();
+        break;
+      default:
+        this.pastValue = await Promise.resolve(0.00);
+        this.calcInvestment();
+        break;
+    }
+  }
+
 }
