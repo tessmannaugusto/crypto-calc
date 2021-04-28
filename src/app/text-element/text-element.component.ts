@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-text-element',
@@ -11,6 +11,8 @@ export class TextElementComponent implements OnInit {
   currentValue;
   coinValue: number = 55000;
   resultValue: number;
+  investToggle: boolean = false;
+  investToggleValue: string = "invest";
 
   currencies:string[] = ["Bitcoin", "Ethereum", "Dogecoin", "blabla"]
   selectedCurrency: string = this.currencies[0]
@@ -77,5 +79,16 @@ export class TextElementComponent implements OnInit {
   onChangeSelect(){
     console.log(this.selectedCurrency)
     this.fetchCurrentValue(this.selectedCurrency);
+  }
+
+  onInvestToggle(spanElement: HTMLSpanElement){
+    if(this.investToggle){
+      this.investToggle = false;
+      spanElement.innerHTML = "invest"
+    }
+    else{
+      this.investToggle = true;
+      spanElement.innerHTML = "invested"
+    }
   }
 }

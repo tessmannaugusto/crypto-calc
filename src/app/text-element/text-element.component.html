@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col col-xs-12 flex-align-items">
-        <h2 >If I invest $
+        <h2 >If I 
+            <span class="span-invest" (click)="onInvestToggle(investToggleValue)" #investToggleValue>invest</span>
+
+            <span *ngIf="!investToggle"> $
             <input [(ngModel)]= "initialValue" value="{{initialValue}}"
             #inputInitialValue class="inputValue"
             (keyup)="adjustInputSize(inputInitialValue)" (keyup)="validateInput(initialValue,inputInitialValue)"    
@@ -14,8 +17,29 @@
             #inputCoinValue class="coinValue" 
             (keyup)="adjustInputSize(inputCoinValue)"  (keyup)="validateInput(coinValue, inputCoinValue)"
             maxlength= 10 placeholder="value"> 
-            per coin it would be worth 
-            <span class="resultValue">{{resultValue | currency}}</span>.</h2>   
+            per coin it will be worth 
+            <span class="resultValue">{{resultValue | currency}}</span>.</span>
+
+            <span *ngIf="investToggle"> $
+                <input [(ngModel)]= "initialValue" value="{{initialValue}}"
+            #inputInitialValue class="inputValue"
+            (keyup)="adjustInputSize(inputInitialValue)" (keyup)="validateInput(initialValue,inputInitialValue)"    
+            maxlength= 10 placeholder="value">  
+            in
+            <select class="select" [(ngModel)]= "selectedCurrency" (change)="onChangeSelect()" >
+                <option *ngFor="let currency of currencies, let index" value="{{currency}}">{{currency}}</option>
+            </select> on 22-12-2020 it would be worth
+            <span class="resultValue">{{resultValue | currency}}</span>.
+
+            </span>
+            
+        
+        
+        
+        
+        
+        
+        </h2>   
     </div>
     
 </div>
