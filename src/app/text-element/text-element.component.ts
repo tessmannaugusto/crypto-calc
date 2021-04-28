@@ -76,12 +76,10 @@ export class TextElementComponent implements OnInit {
         break;
     }
   }
-
   onChangeSelect(){
     this.fetchCurrentValue(this.selectedCurrency);
     this.fetchPastValue(this.selectedCurrency)
   }
-
   onInvestToggle(spanElement: HTMLSpanElement){
     if(this.investToggle){
       this.investToggle = false;
@@ -118,5 +116,4 @@ export class TextElementComponent implements OnInit {
         break;
     }
   }
-
 }
