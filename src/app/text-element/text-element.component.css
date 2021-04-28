@@ -1,0 +1,25 @@
+.inputValue{
+    border: none;
+    width: 75px;
+    color: #F9DC5C;   
+}
+.coinValue{
+    border: none;
+    width: 90px;
+    color: #F9DC5C;
+    
+}
+.inputValue:focus{
+    border: none;
+}
+.resultValue{
+    font-weight: bold;
+}
+.error{
+    color: red;
+    
+}
+.select{
+    border: none;
+    color: #F9DC5C;
+}
