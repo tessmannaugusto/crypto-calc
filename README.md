@@ -1,5 +1,6 @@
 # CryptoCalc
 
+Crypto related project that will be used to practice new skills. Project will be changing as it evolves. The stack to be used is going to be .net + Angular.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9.
 
 ## Development server
